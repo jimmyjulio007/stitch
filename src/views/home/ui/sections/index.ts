@@ -1,0 +1,10 @@
+export { HeroSection } from './HeroSection';
+export { WorkSection } from './WorkSection';
+export { TrustedSection } from './TrustedSection';
+export { ServicesSection } from './ServicesSection';
+export { UnmatchedFeaturesSection } from './UnmatchedFeaturesSection';
+export { PricingSection } from './PricingSection';
+export { TestimonialSection } from './TestimonialSection';
+export { FaqSection } from './FaqSection';
+export { MarqueeSection } from './MarqueeSection';
+export { FooterSection } from './FooterSection';

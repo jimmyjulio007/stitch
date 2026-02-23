@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #E11D48;
+  --color-primary-light: #FB7185;
+  --color-background-light: #FAFAF9;
+  --color-background-dark: #0F172A;
+
+  --color-accent-light: #18181B;
+  --color-accent-dark: #F8FAFC;
+
+  --color-surface-light: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+
+  --font-display: var(--font-instrument-serif), serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-handwriting: var(--font-handwriting), cursive;
+
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2.5rem;
+  --radius-3xl: 3rem;
+  --radius-4xl: 4rem;
+  --radius-5xl: 5rem;
+
+  --shadow-pricing-glow: 0 0 40px -10px rgba(225, 29, 72, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .glass-nav {
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    background-color: rgba(250, 250, 249, 0.72);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+    transition: backdrop-filter 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .glass-nav-scrolled {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(250, 250, 249, 0.85);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .glass-nav {
+    background-color: rgba(15, 23, 42, 0.78);
+  }
+
+  .dark .glass-nav-scrolled {
+    background-color: rgba(15, 23, 42, 0.9);
+  }
+
+  .masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+
+  .pricing-card-glow {
+    box-shadow: 0 0 60px -12px rgba(225, 29, 72, 0.15);
+  }
+
+  .hero-glow {
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(225, 29, 72, 0.06) 0%, transparent 70%);
+  }
+
+  .dark .hero-glow {
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(225, 29, 72, 0.08) 0%, transparent 70%);
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #E11D48 0%, #FB7185 50%, #E11D48 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-soft {
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  }
+
+  .shadow-soft-lg {
+    box-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.08), 0 4px 12px -4px rgba(0, 0, 0, 0.04);
+  }
+
+  .shadow-soft-xl {
+    box-shadow: 0 20px 60px -16px rgba(0, 0, 0, 0.1), 0 8px 20px -6px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark .shadow-soft,
+  .dark .shadow-soft-lg,
+  .dark .shadow-soft-xl {
+    box-shadow: none;
+  }
+
+  .card-hover-lift {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+
+  .card-hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .btn-glow {
+    box-shadow: 0 8px 24px -4px rgba(225, 29, 72, 0.3);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 12px 32px -4px rgba(225, 29, 72, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .section-divider {
+    border-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .section-divider {
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .theme-explosion {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: scale(0);
+    will-change: transform;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.mobile-menu-item {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
